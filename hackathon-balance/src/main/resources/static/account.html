@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Library Catalog</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	crossorigin="anonymous"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#submit").click(function() {
+			$.get("/account/search/accountType", {
+				"accountType" : $("input[name='accountType']").val()
+			}, function(data) {
+				var account = data._embedded.account[0];
+				var thead = "<th>Account Id</th><th>Customer Id</th><th>Account Type</th><th>Balance</th><th>Action</th>"
+				var tbody = "<td>"
+						+ account.accountId
+						+ "</td><td>"
+						+ account.customerId
+						+ " "
+						+ account.accountType
+						+ "</td><td>"
+						+ account.balance
+						+ "</td><td><a href=\"\">"
+						+ "transfer"
+						+ "</a></td>";
+				$("body").append("<table><thead>" +thead+"</thead><tbody>"+tbody +"</tbody></table>");
+			}, "json");
+		});
+	});
+</script>
+</head>
+<body>
+	<div>
+		<label>Account Type:</label> <input name="accountType" />
+		<button id="submit">Submit</button>
+	</div>
+</body>
+</html>

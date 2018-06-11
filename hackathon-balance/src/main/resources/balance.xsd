@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.hackathon.hcl.com/Balance" 
+	xmlns:tns="http://www.hackathon.hcl.org/BalanceRequest" elementFormDefault="qualified">
+
+	<xs:element name="BalanceRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageId" type="xs:int"></xs:element>
+				<xs:element name="reqType" type="xs:string"></xs:element>
+				<xs:element name="account" type="xs:integer"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="BalanceResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageId" type="xs:int"></xs:element>
+				<xs:element name="account" type="xs:integer"></xs:element>
+				<xs:element name="balance" type="xs:decimal"></xs:element>
+				<xs:element name="currency" type="xs:string"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+
+</xs:schema>
