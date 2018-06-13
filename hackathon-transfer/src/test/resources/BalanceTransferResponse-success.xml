@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<BalanceTransferResponse xmlns="http://www.hackathon.hcl.com/BalanceTransfer" 
-	xsi:schemaLocation="http://www.hackathon.hcl.com/Balance balance-transfer.xsd"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<message-id>10004 </message-id>
-	<txn-id>123</txn-id>
-	<status-code>000</status-code>
-</BalanceTransferResponse>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FundTransferResponse xmlns="http://www.hackathon.hcl.com/Transfer">
+    <messageId>1001</messageId>
+    <txnId>123</txnId>
+    <statusCode>000</statusCode>
+</FundTransferResponse>

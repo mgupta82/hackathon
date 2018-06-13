@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<BalanceTransferResponse xmlns="http://www.hackathon.hcl.com/BalanceTransfer" 
-	xsi:schemaLocation="http://www.hackathon.hcl.com/Balance balance-transfer.xsd"
+<FundTransferResponse xmlns="http://www.hackathon.hcl.com/Transfer" 
+	xsi:schemaLocation="http://www.hackathon.hcl.com/Transfer transfer.xsd"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<message-id>1002</message-id>
-	<status-code>899</status-code>
-	<failure-reason>Invalid Account Number</failure-reason>
-</BalanceTransferResponse>
+	<messageId>1002</messageId>
+	<statusCode>899</statusCode>
+	<failureReason>Invalid Account Number</failureReason>
+</FundTransferResponse>
