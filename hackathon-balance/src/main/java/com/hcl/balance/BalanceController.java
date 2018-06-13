@@ -2,14 +2,13 @@ package com.hcl.balance;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.Map;
 
-import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,16 +19,15 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hcl.hackathon.balance.Account;
 import com.hcl.hackathon.balance.BalanceRequest;
 import com.hcl.hackathon.balance.BalanceResponse;
+import com.hcl.hackathon.balance.Customer;
 import com.hcl.hackathon.balance.ObjectFactory;
-import com.mongodb.DB;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 
 @RestController
 @RequestMapping("/api")
-@EnableResourceServer
+//@EnableResourceServer
 public class BalanceController {
 	
 	private ObjectFactory ObjectFactory = new ObjectFactory();
@@ -45,31 +43,49 @@ public class BalanceController {
 	public BalanceResponse getBalance(@RequestBody BalanceRequest balanceRequest) throws URISyntaxException, JsonParseException, JsonMappingException, IOException {
 		Transaction transaction = new Transaction();
 		transaction.setId(balanceRequest.getMessageId());
-		transaction.setInputMessage(balanceRequest.getReqType());
+		transaction.setInputMessage("BalanceRequest");
 		transaction.setInputTimestamp(new Date());
 		
 		//Call Core
 		BalanceResponse balanceResponse = ObjectFactory.createBalanceResponse();
 		try {
 			RestTemplate template = new RestTemplate();
-			URI uri = new URI("http://localhost:9999/core/accounts/"+balanceRequest.getAccount());
+			URI uri = new URI("http://localhost:9999/core/accounts/"+balanceRequest.getCustomerId());
 			String json = template.getForObject(uri,  String.class);
 			Map<String,Object> map = ObjectMapper.readValue(json, Map.class);
 			transaction.setOutputTimestamp(new Date());
 			
 			//Create Response
 			balanceResponse.setMessageId(balanceRequest.getMessageId());
-			balanceResponse.setAccount(balanceRequest.getAccount());
-			balanceResponse.setBalance(new BigDecimal(map.get("balance").toString()));
-			balanceResponse.setCurrency("AUD");
+			Account account = new Account();
+			account.setAccountId(new BigInteger("123"));
+			account.setBalance(new BigDecimal(map.get("balance").toString()));
+			account.setCurrency("AUD");
+
+			Account account1 = new Account();
+			account1.setAccountId(new BigInteger("123"));
+			account1.setBalance(new BigDecimal(map.get("balance").toString()));
+			account1.setCurrency("AUD");
+			
+			Customer customer = new Customer();
+			customer.setCustomerId(balanceRequest.getCustomerId());
+			Customer.Accounts accounts = new Customer.Accounts();
+			customer.setAccounts(accounts);
+			accounts.getAccount().add(account);
+			accounts.getAccount().add(account1);
+			balanceResponse.setCustomer(customer);
+			
+
 			transaction.setStatus("success");
 		}catch (Exception ex) {
 			transaction.setFailureReasonCode("1");
 			transaction.setStatus("failed");
+			balanceResponse.setStatusCode("123");
+			balanceResponse.setFailureReason(ex.getMessage());
 		}
 		//persist transaction
 		transactionRepository.save(transaction);
-		
+
 		return balanceResponse;
 	}
 	

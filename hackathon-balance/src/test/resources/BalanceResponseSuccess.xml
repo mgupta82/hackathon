@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<BalanceResponse xmlns="http://www.hackathon.hcl.org/Balance"  
+    xsi:schemaLocation="http://www.hackathon.hcl.org/Balance balance.xsd" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"> 
+    <messageId>14</messageId>
+    <customer>
+        <customerId>1</customerId>
+        <accounts>
+                <account>
+                    <accountId>123</accountId>
+                    <balance>100.0</balance>
+                    <currency>AUD</currency>
+                </account>
+                <account>
+                    <accountId>123</accountId>
+                    <balance>100.0</balance>
+                    <currency>AUD</currency>
+                </account>
+        </accounts>
+    </customer>
+</BalanceResponse> 

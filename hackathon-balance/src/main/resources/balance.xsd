@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-	targetNamespace="http://www.hackathon.hcl.com/Balance" 
-	xmlns:tns="http://www.hackathon.hcl.org/BalanceRequest" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+       targetNamespace="http://www.hackathon.hcl.com/Balance"
+       xmlns:tns="http://www.hackathon.hcl.org/Balance" elementFormDefault="qualified" xmlns:ns1="http://www.hackathon.hcl.com/Balance">
 
 	<xs:element name="BalanceRequest">
-		<xs:complexType>
+    	<xs:complexType>
 			<xs:sequence>
 				<xs:element name="messageId" type="xs:int"></xs:element>
-				<xs:element name="reqType" type="xs:string"></xs:element>
-				<xs:element name="account" type="xs:integer"></xs:element>
+				<xs:element name="customerId" type="xs:integer"></xs:element>
 			</xs:sequence>
 		</xs:complexType>
-	</xs:element>
+	</xs:element>	
 	
+
+   	<xs:complexType name="Customer">
+		<xs:sequence>
+			<xs:element name="customerId" type="xs:integer"></xs:element>
+			<xs:element name="accounts">
+			    <xs:complexType>
+			        <xs:sequence>
+			            <xs:element maxOccurs="unbounded" ref="ns1:Account"/>
+			        </xs:sequence>
+			    </xs:complexType>
+			</xs:element>  			
+		</xs:sequence>
+	</xs:complexType>
+	
+    <xs:element name="Account">
+        <xs:complexType>
+            <xs:sequence>
+				<xs:element name="accountId" type="xs:integer"></xs:element>
+				<xs:element name="balance" type="xs:decimal"></xs:element>
+				<xs:element name="currency" type="xs:string"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>	
+
 	<xs:element name="BalanceResponse">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="messageId" type="xs:int"></xs:element>
-				<xs:element name="account" type="xs:integer"></xs:element>
-				<xs:element name="balance" type="xs:decimal"></xs:element>
-				<xs:element name="currency" type="xs:string"></xs:element>
+				<xs:element name="customer" minOccurs="0" type="ns1:Customer"/>
+				<xs:element name="statusCode" minOccurs="0"/>
+				<xs:element name="failureReason" minOccurs="0"/>			
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
-
 </xs:schema>

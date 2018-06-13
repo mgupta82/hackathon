@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<BalanceResponse xmlns="http://www.hackathon.hcl.org/Balance"  
+    xsi:schemaLocation="http://www.hackathon.hcl.org/Balance balance.xsd" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"> 
+    <messageId>12</messageId> 
+    <statusCode>899 </statusCode>  
+    <failureReason>Invalid Account Number</failureReason> 
+</BalanceResponse> 

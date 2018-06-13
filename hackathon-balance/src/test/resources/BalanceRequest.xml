@@ -2,6 +2,6 @@
 <BalanceRequest xmlns="http://www.hackathon.hcl.com/Balance"
 xsi:schemaLocation="http://www.hackathon.hcl.com/Balance balance.xsd"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<message-id>12</message-id>
-	<customer-id>112</customer-id>
+	<messageId>14</messageId>
+	<customerId>1</customerId>
 </BalanceRequest>
