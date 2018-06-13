@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<BalanceRequest xmlns="http://www.hackathon.hcl.com/Balance" 
-	xsi:schemaLocation="http://www.hackathon.hcl.com/Balance balance.xsd"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
-	<messageId>12</messageId>
-	<reqType>BALINQ</reqType>
-	<account>123</account>
-
+<BalanceRequest xmlns="http://www.hackathon.hcl.com/Balance"
+xsi:schemaLocation="http://www.hackathon.hcl.com/Balance balance.xsd"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<message-id>12</message-id>
+	<customer-id>112</customer-id>
 </BalanceRequest>

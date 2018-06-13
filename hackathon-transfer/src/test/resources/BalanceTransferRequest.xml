@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BalanceTransferRequest xmlns="http://www.hackathon.hcl.com/BalanceTransfer" 
+	xsi:schemaLocation="http://www.hackathon.hcl.com/BalanceTransfer balance_transfer.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<message-id>1001</message-id>
+	<from-account>101</from-account>
+	<to-account>201</to-account>
+	<to-account-name>xyz</to-account-name>
+	<to-bsb></to-bsb>
+	<txn-amount></txn-amount>
+</BalanceTransferRequest>
